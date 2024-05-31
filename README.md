@@ -1,0 +1,1 @@
+Developed "Pathoese," a web application that connects customers with pathology services. Users can browse pathology labs, view prices and descriptions, and schedule appointments for various medical tests. The platform enhances accessibility and convenience for users seeking diagnostic services.
