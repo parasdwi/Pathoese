@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nova+Square&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_home.css') }}">
+    <title>Hello, world!</title>
+</head>
+
+<body>
+    <header>
+        <div class="mainheader" id="main_header">
+            <div class="logo"><img src="static/baseimg/logo.png" alt=""></div>
+
+            <nav>
+                <a href="#main_header">Home</a>
+                <a href="#about_page">About</a>
+                <a href="#contact_us">Contact</a>
+                <a href="#contact_us">Helpline</a>
+            </nav>
+            <div class="menubtn">
+
+                <a href="{{ url_for('main_login') }}"><button>Login</button></a>
+            </div>
+        </div>
+
+        <main>
+            <section class="left-sec">
+                <h3>We Are Here For Your Care</h2>
+                <h1>TESTING MADE EASIER </h1>
+                <p>with Patho Ease</p>
+                <a href="{{ url_for('main_login') }}"><button>Make an appointment</button></a>
+
+            </section>
+
+            <section class="right-sec">
+                <figure>
+                    <img src="static/baseimg/mainbg.png" alt="">
+                </figure>
+            </section>
+        </main>
+    </header>
+    <div class="about" id="about_page">
+        <div class="section">
+            <h1 align="center">    
+                About PathoEase
+            </h1>
+            <p>
+                Welcome to PathoEase, your trusted online resource for comprehensive and reliable pathology information. Our
+                mission is to empower individuals with knowledge about various pathological conditions, enabling them to
+                make informed decisions about their health.
+            </p>
+            
+        </div>
+        <div class="section">
+            <h1 align="center">Who We Are</h1>
+            <p>
+                At PathoEase, we are a team of dedicated professionals, including experienced pathologists, medical
+                researchers, and content creators. We understand the importance of accurate and up-to-date information when
+                it comes to health matters, and we are committed to providing you with the latest insights into various
+                pathological conditions.
+            </p>
+        </div>
+        <!-- <div class="section">
+            <h2 align="center">
+                What We Offer
+            </h2>
+            <ul>
+                <li class="point">
+                    <b> 
+                        Comprehensive Pathology Guides:
+                    </b>
+                    Explore detailed guides on a wide range of pathological conditions, from common ailments to rare
+                    diseases. Our articles are written in an accessible language to ensure that everyone, regardless of
+                    their medical background, can understand the information.
+                </li>
+                <li class="point">
+                    <b>
+                        Latest Research and Developments:
+                    </b>
+                    Stay informed about the latest advancements in pathology. We regularly update our content to reflect the
+                    most recent research findings and medical breakthroughs.
+                </li>
+                <li class="point">
+                    <b>
+                        User-Friendly Interface:
+                    </b>
+                    Navigate our site effortlessly with our user-friendly interface. Whether you're a healthcare
+                    professional, a student, or someone seeking information for personal knowledge, we have designed our
+                    site to cater to your specific needs.
+    
+                </li>
+            </ul>    
+        </div> -->
+        <div class="section">
+            <h1 align="center">
+                Our Vision
+            </h1>
+            <p>
+                We envision a world where individuals are empowered with knowledge, making informed decisions about their
+                health. By providing accurate and easy-to-understand information, we aim to contribute to the overall
+                well-being of our users.
+            </p>
+            <h2 align="center">Connect With Us</h2>
+        <p>
+            Have questions or suggestions? We would love to hear from you. Contact our team at
+            [contact@yourpathologicalsite.com] .
+        </p>
+        <p>
+            Thank you for choosing PathoEase as your go-to resource for pathology information. We are here to support
+            you on your journey to understanding and managing your health.
+        </p>
+        </div>
+    </div>
+    <div class="footer" id="contact_us">
+        <div class="contact">
+            <h3>Contact Us</h3>
+            <p>
+                <b>Email : </b>contact@pathoease.com
+            </p>
+            <br>
+        </div>
+        <div class="Add">
+            <h3 >Address</h3>
+            Nirala residency ,Greater Noida</p>
+            <br>
+        </div>
+        <div class="helpline">
+            <h3 style="text-align: right;">Helpline No</h3>
+            1800 555 6767</p>
+            <br>
+        </div>
+    </div>
+    
+</body>
+
+</html>

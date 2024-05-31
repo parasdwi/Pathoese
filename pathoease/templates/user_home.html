@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <style>
+        /* Your provided CSS styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+            margin: 0;
+        }
+
+        .wrapper {
+            width: 80%;
+            max-width: 600px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin: 20px;
+        }
+
+        .welcome-section {
+            padding: 20px;
+            background-color: #a130bb;
+            color: #fff;
+            border-radius: 10px 10px 0 0;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .title {
+            padding: 20px 0;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            color: #333;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .container h2 {
+            text-align: left;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .appointments {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        form {
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #a130bb;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #cf6be5;
+        }
+
+        .login-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #a130bb;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
+        }
+
+        .login-btn:hover {
+            background-color: #cf6be5;
+        }
+
+        a {
+            text-decoration: none;
+            color: #a130bb;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #cf6be5;
+        }
+        .signout-btn{
+            margin-top: 15px;
+        }
+        .signout-btn:hover{
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="welcome-section">
+        <h1>Welcome to Your Page</h1>
+    </div>
+
+    <div class="title">Hello, {{ user['name'] }}!</div>
+    <div class="container">
+        <h2>Your Appointments</h2>
+        <div class="appointments">
+            {% for appointment,pathology in appointments %}
+            <form method="POST" action="{{ url_for('cancel_appointment', appointment_id=appointment.id) }}">
+                <p>
+                    <input type="hidden" name="appointment_id" value="{{ appointment.id }}">
+                    Pathology Name: {{ pathology.name }}<br>
+                    Test Name: {{ appointment.test_name }}<br>
+                    Date: {{ appointment.date }}<br>
+                    Slot: {{ appointment.slot }}<br>
+                    Status: {{ appointment.status }}<br>
+                    <button type="submit">Cancel Appointment</button>
+                </p>
+            </form>
+            {% endfor %}
+        </div>
+        <div>
+            <a href="{{ url_for('search_pathologies') }}" class="login-btn">Add Appointment</a>
+        </div>
+        
+        <div class="signout-btn">
+            <a href="{{ url_for('user_signout') }}">Sign Out</a>
+        </div>
+       
+    </div>
+</div>
+
+</body>
+</html>

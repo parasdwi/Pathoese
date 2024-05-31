@@ -1,0 +1,137 @@
+<!-- search_results.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
+    <title>Search Results</title>
+    <style>
+        /* CSS styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: roboto, arial;
+        }
+
+        body {
+            display: grid;
+            height: 100%;
+            place-items: center;
+            background: #ffffff;
+            margin: 0;
+        }
+
+        .wrapper {
+            width: 70%; /* Adjust the width as needed */
+            background: #fff;
+            border-radius: 5px;
+            margin-top: 20px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow for better visibility */
+        }
+
+        .wrapper h1 {
+            line-height: 80px;
+            background: #a130bb;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+            font-size: 25px;
+            font-weight: 600;
+            color: #fff;
+            margin: 0;
+        }
+
+        .wrapper ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .wrapper ul li {
+            padding: 20px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .wrapper ul li:last-child {
+            border-bottom: none;
+        }
+
+        .wrapper ul li p {
+            margin-bottom: 8px;
+        }
+
+        .wrapper ul li form button {
+            font-weight: 500;
+            font-size: 16px;
+            color: #fff;
+            padding: 10px 20px;
+            background: #a130bb;
+            border: 1px solid #a130bb;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            display: inline-block;
+        }
+
+        .wrapper ul li form button:hover {
+            background: #cf6be5;
+        }
+
+        .wrapper a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #a130bb;
+            font-weight: bold;
+        }
+
+        .wrapper a:hover {
+            text-decoration: underline;
+        }
+
+        .result-box {
+            background: #fff;
+            border-radius: 5px;
+            margin-top: 20px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+<div class="wrapper">
+    <h1>Search Results</h1>
+    {% if results %}
+    {% for result in results %}
+    <div class="result-box">
+        <ul>
+            <li>
+                <p>{{ result['pathology'].name }} - {{ result['pathology'].area }}</p>
+                <p>Address: {{ result['pathology'].address if result['pathology'].address else 'N/A' }}</p>
+                <p>Test Name: {{ result['test_name'] }}</p>
+                <p>Price: {{ result['price'] }}</p>
+                {% if result['test_name'] %}
+                <form method="GET" action="{{ url_for('book_pathology', pathology_id=result['pathology'].id) }}">
+                    <input type="hidden" name="test_name" value="{{ result['test_name'] }}">
+                    <button type="submit">Book</button>
+                </form>
+                {% else %}
+                <p>Test name not available</p>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+    {% endfor %}
+    {% else %}
+            <p>No results found.</p>
+    {% endif %}
+
+    <!-- Add more .result-box divs for each search result -->
+    <a href="{{ url_for('search_pathologies') }}">Back to Search</a>
+</html>

@@ -1,0 +1,64 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Pathology Management</title>
+</head>
+
+<body>
+    <a href="/"><h1>Pathologies</h1></a>
+    <ul>
+        {% if pathologies %}
+        {% for pathology in pathologies %}
+        <li>
+            <br>
+            <p>ID: {{ pathology.unique_id }}</p>
+            <p>Name: {{ pathology.name }} - {{ pathology.area }}</p>
+            <p>Address: {{ pathology.address if pathology.address else 'N/A' }}</p>
+            <h3>Tests Offered:</h3>
+            <ul>
+                {% for test_price in pathology.test_prices %}
+                {% set test = test_dict.get(test_price.test_id) %}
+                <li>
+                    Test: {{ test.name if test else 'N/A' }} - Price: {{ test_price.price }}
+                </li>
+                {% endfor %}
+            </ul>
+            <a href="{{ url_for('edit_pathology', pathology_id=pathology.id) }}">Edit</a>
+            <a href="{{ url_for('delete_pathology', pathology_id=pathology.id) }}">Delete</a>
+        </li>
+        {% endfor %}
+        {% else %}
+        <p>No pathologies available.</p>
+        {% endif %}
+    </ul>
+
+    <a href="{{ url_for('add_pathology') }}">Add Pathology</a>
+
+    <h1>Tests</h1>
+    <ul>
+        {% if tests %}
+        {% for test in tests %}
+        <li>
+            {% if test %}
+            {{ test.name }}
+            <a href="{{ url_for('edit_test', test_id=test.id) }}">Edit</a>
+            <a href="{{ url_for('delete_test', test_id=test.id) }}">Delete</a>
+            {% else %}
+            <p>Test no longer exists.</p>
+            {% endif %}
+        </li>
+        {% endfor %}
+        {% else %}
+        <p>No tests available.</p>
+        {% endif %}
+    </ul>
+    <a href="{{ url_for('add_test') }}">Add Test</a>
+</body>
+
+</html>

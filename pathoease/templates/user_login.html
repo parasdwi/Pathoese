@@ -1,0 +1,162 @@
+<!-- templates/user_login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+    <!-- <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> -->
+    <!-- <link rel="stylesheet" href="user_login_signup.css"> -->
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: roboto, arial;
+}
+
+html,body{
+    display: grid;
+    height: 100%;
+    /* place-items: center; */
+    background: #ebebeb;
+    
+}
+
+.wrapper{
+    margin-left: 600px;
+    width: 380px;
+    background:#fff ;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper .title{
+    line-height: 80px;
+    background: #a130bb;
+    text-align: center;
+    border-radius: 5px 5px 0 0;
+    font-size: 25px;
+    font-weight: 600;
+    color: #fff;
+
+}
+
+.wrapper form{
+    padding: 30px 25px 25px 25px;
+
+}
+
+.wrapper .title .row{
+    height: 45px;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.wrapper form .row input{
+    height: 35px;
+    width: 100%;
+    outline: none;
+    padding-left: 9px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+
+}
+
+form .row input:focus{
+    box-shadow: inset 0px 0px 2px 2px rgba(161, 48, 187,0.25);
+}
+
+/* .wrapper form .row i{
+    position: absolute;
+    width: 47px;
+    height: 100%;
+    color: #fff;
+    font-size: 18px;
+    background: #a130bb;
+    border: 1px solid #a130bb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+
+.wrapper form .pass{
+    margin-top: 5px;
+    margin-bottom: 9px;
+}
+
+.wrapper form .pass a{
+    color: #a130bb;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.wrapper form .pass a:hover{
+    text-decoration: underline;
+}
+
+.wrapper form .button input{
+    font-weight: 500;
+    font-size: 10px;
+    color: #fff;
+    padding-left: 0px;
+    background:#a130bb ;
+    border: 1px solid #a130bb;
+    cursor: pointer;
+}
+
+form .button input:hover{
+    background: #cf6be5;
+}
+
+
+.wrapper form .signup-link{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 9px;
+    font-size: 14px;
+}
+
+.wrapper form .signup-link a{
+    color: #a130bb;
+    text-decoration: none;
+}
+
+.wrapper form .signup-link a:hover{
+    text-decoration: underline;
+}
+    </style>
+</head>
+<body>
+    {% extends 'navbar.html' %}
+    {% block body %}
+   <div class="wrapper">
+    <div class="title"><span>User Login</span></div>
+    <form method="POST" action="{{ url_for('user_login') }}">
+        {{ form.hidden_tag() }}
+        {% if error_message %}
+        <p class="error-message">{{ error_message }}</p>
+        {% endif %}
+        <div class="row">
+            <i class="fas fa-user"></i>
+        <!-- <input type="text" placeholder="Email or Phone"> -->
+        {{ form.email.label }}
+        {{ form.email(size=20) }}
+        </div>
+        <div class="row">
+            <i class='fas fa-lock'></i>
+            {{ form.password.label }}
+            {{ form.password(size=20) }}
+        </div>
+        <div class="row button">
+            <br>
+        <input type="submit" value="Login" >
+       <div class="signup-link">Not a member?<a href="{{ url_for('user_signup') }}"> Signup now</a></div>
+        </div>
+    </form>
+   </div>
+   {% endblock body %}
+</body>
+</html>
+    

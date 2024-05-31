@@ -1,0 +1,168 @@
+<!-- Include Select2 CSS and JS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+<!-- search_form.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Pathologies</title>
+
+    <!-- Initialize Select2 -->
+    <script>
+        $(document).ready(function () {
+            // Initialize Select2 for the test dropdown with AJAX
+            $('#test').select2({
+                ajax: {
+                    url: "{{ url_for('search_tests') }}",
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function (data) {
+                        return {
+                            results: data.results
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 1, // Show results after typing one character
+                placeholder: 'Select Test Type', // Placeholder text
+                escapeMarkup: function (markup) { return markup; } // Allows for markup to be added to the dropdown results
+            });
+
+            // Initialize Select2 for the area dropdown with AJAX
+            $('#area').select2({
+                ajax: {
+                    url: "{{ url_for('search_areas') }}",
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function (data) {
+                        return {
+                            results: data.results
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 1, // Show results after typing one character
+                placeholder: 'Enter Area', // Placeholder text
+                escapeMarkup: function (markup) { return markup; } // Allows for markup to be added to the dropdown results
+            });
+        });
+    </script>
+    <style>
+        /* CSS styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: roboto, arial;
+        }
+
+        html, body {
+            display: grid;
+            height: 100%;
+            place-items: center;
+            background:  #ebebeb;
+        }
+
+        .wrapper {
+            width: 380px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .wrapper .title {
+            line-height: 80px;
+            background: #a130bb;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+            font-size: 25px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .wrapper form {
+            padding: 30px 25px 25px 25px;
+        }
+
+        .wrapper .title .row {
+            height: 45px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .wrapper form .row select {
+            height: 40px;
+            width: 100%;
+            outline: none;
+            padding-left: 9px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid lightgrey;
+        }
+
+        form .row select:focus {
+            box-shadow: inset 0px 0px 2px 2px rgba(161, 48, 187, 0.25);
+        }
+
+        .wrapper form .button {
+            text-align: center;
+        }
+
+        .wrapper form .button button {
+            font-weight: 500;
+            font-size: 16px;
+            color: #fff;
+            padding: 10px 20px;
+            background: #a130bb;
+            border: 1px solid #a130bb;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            display: inline-block;
+        }
+
+        form .button button:hover {
+            background: #cf6be5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="title">Search Pathologies</div>
+        <form method="post" action="{{ url_for('search_pathologies') }}">
+            <div class="row">
+                <label for="test">Select Test Type:</label>
+                <!-- Use Select2 for the filterable list with AJAX -->
+                <select name="test" id="test" style="width: 100%;" required >
+                    <option value="Please Select">Select Test</option>
+                    <option value="MRI">MRI</option>
+                    <option value="blood">Blood</option>
+                    <option value="sugar test">Suger Test</option>
+                </select>
+            </div>
+            <br>
+            <div class="row">
+                <label for="area">Enter Area:</label>
+                <!-- Use Select2 for the filterable list with AJAX -->
+                <select name="area" id="area" style="width: 100%;" required>
+                    <option value="Please Select">Select Area</option>
+                    <option value="abc">ABC</option>
+                    <option value="xyz">XYZ</option>
+                    <option value="pqr">PQR</option>
+                </select>
+            </div>
+            <br>
+            <div class="button">
+                <button type="submit">Search</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

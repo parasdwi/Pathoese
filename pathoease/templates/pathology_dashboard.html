@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pathology Dashboard</title>
+    <style>
+        /* Reset and global styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ebebeb;
+            margin: 0;
+        }
+
+        /* Container styles */
+        .container {
+            width: 480px;
+            /* Increased width */
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container header {
+            background-color: #a130bb;
+            border-radius: 8px 8px 0 0;
+            padding: 15px 0;
+            text-align: center;
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            /* Increased space below header */
+            margin-top: 15px;
+        }
+
+        .container .content {
+            padding: 20px 0;
+        }
+
+        .container .content p {
+            margin-bottom: 15px;
+        }
+
+        .container .content h2 {
+            margin-bottom: 10px;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .appointment {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            /* Added border */
+            border-radius: 8px;
+            /* Rounded corners */
+        }
+
+        .appointment p {
+            margin-bottom: 8px;
+        }
+
+        .appointment button {
+            font-size: 14px;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            outline: none;
+            margin-top: 8px;
+            /* Adjusted button margin */
+        }
+
+        .accept-btn {
+            background-color: #5cb85c;
+            color: #fff;
+            margin-right: 10px;
+        }
+
+        .reject-btn {
+            background-color: #d9534f;
+            color: #fff;
+        }
+
+        .logout-btn {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #a130bb;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .logout-btn:hover {
+            text-decoration: underline;
+        }
+    </style>
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>Welcome to Pathology Dashboard</header>
+        <div class="content">
+            <p>Hello, {{ pathology['name'] }}!</p>
+            <h2>Appointments Booked with Your Pathology</h2>
+            <div class="appointments">
+                <div class="appointment">
+                    {% for appointment in appointments %}
+                    <p>
+                        Test Name: {{ appointment.test_name }}<br>
+                        Patient Name: {{ appointment.name }}<br>
+                        Date: {{ appointment.date }}<br>
+                        Slot: {{ appointment.slot }}<br>
+                        Status: {{ appointment.status }}<br>
+                        {% if appointment.status == 'pending' %}
+                    <form method="post" action="{{ url_for('accept_appointment', appointment_id=appointment.id) }}">
+                        <button type="submit" class="accept-btn">Accept</button>
+                    </form>
+                    <form method="post" action="{{ url_for('reject_appointment', appointment_id=appointment.id) }}">
+                        <button type="submit" class="reject-btn">Reject</button>
+                    </form>
+                    {% endif %}
+                    </p>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+        <a href="pathology_signout" class="logout-btn">Sign Out</a>
+    </div>
+</body>
+
+</html>

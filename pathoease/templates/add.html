@@ -1,0 +1,39 @@
+<!-- add.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Add Pathology</title>
+</head>
+
+<body>
+    <h1>Add Pathology</h1>
+    <form method="post" action="{{ url_for('add_pathology') }}">
+        <label for="name">Name:</label>
+        <input type="text" name="name" required>
+        <label for="area">Area:</label>
+        <input type="text" name="area" required>
+        <label for="address">Address:</label>
+        <input type="text" name="address">
+
+        <label>Tests Offered:</label>
+        {% for test in all_tests %}
+            <div class="checkbox">
+                <input type="checkbox" name="tests_offered" value="{{ test.id }}" id="test_{{ test.id }}">
+                <label for="test_{{ test.id }}">{{ test.name }}</label>
+                <label for="price_{{ test.id }}">Price:</label>
+                <input type="number" name="price_{{ test.id }}" step="0.01">
+            </div>
+        {% endfor %}
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Add Pathology</button>
+    </form>
+</body>
+
+</html>
